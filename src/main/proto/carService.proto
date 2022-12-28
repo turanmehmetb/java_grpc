@@ -1,0 +1,68 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package grpc.generate;
+
+
+message Reservation {
+
+  	int32 reservationId = 1;
+  	string pickupTime = 2;
+  	string pickupLocation = 3;
+  	string dropoffTime = 4;
+  	string dropoffLocation = 5;
+  	string brand = 6;
+  	string model = 7;
+  
+}
+
+message ListRequest {}
+
+message ListResponse {
+
+	repeated Reservation reservations = 1;
+  
+}
+ 
+ message GetRequest {
+ 
+ 	int32 reservationId = 1;
+
+}
+ 
+message GetResponse {
+ 
+ 	Reservation reservation = 1;
+ 	 
+}
+ 
+message AddRequest {
+
+  	Reservation reservation = 1;
+
+}
+ 
+message AddResponse {
+
+  	int32 reservationId = 1;
+ 	 
+}
+
+message CancelRequest {
+
+  	int32 reservationId = 1;
+
+}
+ 
+message CancelResponse {
+
+  	int32 reservationId = 1;
+ 	 
+}
+
+service CarRentalService {
+    rpc list(ListRequest) returns (ListResponse);
+    rpc get(GetRequest) returns (GetResponse);
+    rpc add(AddRequest) returns (AddResponse);
+    rpc cancel(CancelRequest) returns (CancelResponse);
+    
+}
